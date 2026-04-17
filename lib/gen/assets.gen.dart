@@ -20,8 +20,11 @@ class $AssetsLogoGen {
   /// File path: assets/logo/app_logo.svg
   SvgGenImage get appLogo => const SvgGenImage('assets/logo/app_logo.svg');
 
+  /// File path: assets/logo/onboarding_logo.svg
+  SvgGenImage get onboardingLogo => const SvgGenImage('assets/logo/onboarding_logo.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [appLogo];
+  List<SvgGenImage> get values => [appLogo, onboardingLogo];
 }
 
 class Assets {

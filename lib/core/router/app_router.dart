@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:one_pass/features/onboarding/presentation/pages/onborading_screen.dart';
 import 'package:one_pass/features/splash/presentation/pages/splash_page.dart';
 
 class AppRouter {
@@ -6,9 +7,10 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     routes: [
+      GoRoute(path: '/', builder: (context, state) => const SplashPage()),
       GoRoute(
-        path: '/',
-        builder: (context, state) => const SplashPage(),
+        path: OnboradingScreen.name,
+        builder: (context, state) => const OnboradingScreen(),
       ),
     ],
   );
