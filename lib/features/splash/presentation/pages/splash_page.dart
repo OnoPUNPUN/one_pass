@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:one_pass/core/constants/app_strings.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
+import 'package:one_pass/features/onboarding/presentation/pages/onborading_screen.dart';
 import 'package:one_pass/gen/assets.gen.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future<void>.delayed(const Duration(seconds: 3), _goToOnboarding);
+  }
+
+  void _goToOnboarding() {
+    if (!mounted) {
+      return;
+    }
+
+    context.go(OnboradingScreen.name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +40,7 @@ class SplashPage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(flex: 7),
-              Center(
-                child: Assets.logo.appLogo.svg(
-                  width: 104,
-                  height: 104,
-                ),
-              ),
+              Center(child: Assets.logo.appLogo.svg(width: 104, height: 104)),
               const Spacer(flex: 8),
               Padding(
                 padding: const EdgeInsets.only(bottom: 24),
