@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:one_pass/features/auth/presentation/pages/signup_screen.dart';
 import 'package:one_pass/features/onboarding/presentation/pages/onborading_screen.dart';
 import 'package:one_pass/features/splash/presentation/pages/splash_page.dart';
 
@@ -11,6 +12,10 @@ class AppRouter {
       GoRoute(
         path: OnboradingScreen.name,
         builder: (context, state) => const OnboradingScreen(),
+      ),
+      GoRoute(
+        path: SignupScreen.name,
+        builder: (context, state) => const SignupScreen(),
       ),
     ],
   );

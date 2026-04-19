@@ -9,3 +9,9 @@ class NetworkException implements Exception {
 
   final String message;
 }
+
+class ServerException implements Exception {
+  const ServerException(this.message);
+
+  final String message;
+}
