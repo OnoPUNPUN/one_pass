@@ -41,10 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Gap(12),
-                Text(
-                  "Let’s get you setup with a new account!",
-                  style: textTheme.bodySmall,
-                ),
+                Text("Welcome Back!", style: textTheme.bodySmall),
                 const Gap(50),
                 AuthField(
                   headingText: "EMAIL",
@@ -92,5 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _eamilTEController.dispose();
+    _passwordTEControler.dispose();
+    super.dispose();
   }
 }
