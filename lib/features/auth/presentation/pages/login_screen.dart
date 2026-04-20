@@ -2,77 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
-import 'package:one_pass/features/auth/presentation/pages/login_screen.dart';
+import 'package:one_pass/features/auth/presentation/pages/signup_screen.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_field.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_text_naviagation.dart';
 import 'package:one_pass/gen/assets.gen.dart';
 
-class SignupScreen extends StatefulWidget {
-  static const name = "/signup-screen";
-  const SignupScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  static const name = "/login-screen";
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
-  final _fromkey = GlobalKey<FormState>();
-  final _emailTEController = TextEditingController();
-  final _nameTEController = TextEditingController();
-  final _passwordTEController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  final _fromKey = GlobalKey<FormState>();
+  final _eamilTEController = TextEditingController();
+  final _passwordTEControler = TextEditingController();
   bool _isPasswordObsecured = true;
-
-  @override
-  void dispose() {
-    _emailTEController.dispose();
-    _nameTEController.dispose();
-    _passwordTEController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
           child: Form(
-            key: _fromkey,
+            key: _fromKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: .start,
               children: [
                 Assets.logo.onboardingLogo.svg(width: 37, height: 20),
-                const Gap(25),
+                Gap(25),
                 Text(
-                  "Register",
+                  "LOGIN",
                   style: textTheme.headlineLarge!.copyWith(
                     color: AppColors.slate,
                   ),
                 ),
-                const Gap(12),
+                Gap(12),
                 Text(
-                  "Let's get you setup with a new account",
+                  "Let’s get you setup with a new account!",
                   style: textTheme.bodySmall,
                 ),
                 const Gap(50),
                 AuthField(
-                  headingText: "Name",
-                  hintText: "John Doe",
-                  controller: _nameTEController,
+                  headingText: "EMAIL",
+                  hintText: "jhondow@gmail.com",
+                  controller: _eamilTEController,
                 ),
-                const Gap(20),
+                Gap(20),
                 AuthField(
-                  headingText: "Email",
-                  hintText: "johndoe@gmail.com",
-                  controller: _emailTEController,
-                ),
-                const Gap(20),
-                AuthField(
-                  headingText: "Password",
+                  headingText: "PASSWORD",
                   hintText: "Password",
-                  controller: _passwordTEController,
+                  controller: _passwordTEControler,
                   isObsecuredText: _isPasswordObsecured,
                   onToggleObsecuredText: () {
                     setState(() {
@@ -80,21 +63,28 @@ class _SignupScreenState extends State<SignupScreen> {
                     });
                   },
                 ),
-                Gap(30),
-                SizedBox(
-                  width: .infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("REGISTER"),
+                Gap(25),
+                Center(
+                  child: Text(
+                    "Forgot Password",
+                    style: textTheme.bodySmall!.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: .w500,
+                    ),
                   ),
                 ),
-                Gap(50),
+                Gap(25),
+                SizedBox(
+                  width: .infinity,
+                  child: ElevatedButton(onPressed: () {}, child: Text("LOGIN")),
+                ),
+                Gap(35),
                 AuthTextNaviagation(
+                  topText: "Don't Have an Account",
+                  botText: "REGISTER",
                   onTap: () {
-                    context.go(LoginScreen.name);
+                    context.go(SignupScreen.name);
                   },
-                  topText: "Already Have an Account?",
-                  botText: "Login",
                 ),
               ],
             ),
