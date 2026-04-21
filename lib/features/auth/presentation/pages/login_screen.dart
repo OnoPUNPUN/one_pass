@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
+import 'package:one_pass/features/auth/presentation/pages/forgot_screen_email.dart';
 import 'package:one_pass/features/auth/presentation/pages/signup_screen.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_field.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_text_naviagation.dart';
@@ -62,11 +63,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Gap(25),
                 Center(
-                  child: Text(
-                    "Forgot Password",
-                    style: textTheme.bodySmall!.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: .w500,
+                  child: TextButton(
+                    onPressed: () {
+                      context.go(ForgotScreenEmail.name);
+                    },
+                    child: Text(
+                      "Forgot Password",
+                      style: textTheme.bodySmall!.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: .w500,
+                      ),
                     ),
                   ),
                 ),
