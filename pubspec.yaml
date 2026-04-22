@@ -47,8 +47,11 @@ flutter_gen:
 flutter:
   uses-material-design: true
   assets:
-    - assets/logo/
+  - assets/logo/
+  - assets/icons/
   fonts:
-    - family: BebasNeue
-      fonts:
-        - asset: assets/fonts/BebasNeue-Regular.ttf
+  - family: BebasNeue
+    fonts:
+    - asset: assets/fonts/BebasNeue-Regular.ttf
+
+# dart run build_runner build --delete-conflicting-outputs

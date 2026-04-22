@@ -6,6 +6,7 @@ import 'package:one_pass/features/auth/presentation/pages/forgot_screen_email.da
 import 'package:one_pass/features/auth/presentation/pages/signup_screen.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_field.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_text_naviagation.dart';
+import 'package:one_pass/features/home/presentation/pages/home_screen.dart';
 import 'package:one_pass/gen/assets.gen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -79,7 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Gap(25),
                 SizedBox(
                   width: .infinity,
-                  child: ElevatedButton(onPressed: () {}, child: Text("LOGIN")),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.go(HomeScreen.name);
+                    },
+                    child: Text("LOGIN"),
+                  ),
                 ),
                 Gap(35),
                 AuthTextNaviagation(
