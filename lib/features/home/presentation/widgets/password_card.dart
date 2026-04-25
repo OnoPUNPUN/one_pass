@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
-import 'package:one_pass/features/home/presentation/models/password_item.dart';
+import 'package:one_pass/features/home/domain/entities/password_item.dart';
+import 'package:one_pass/gen/assets.gen.dart';
 
 class PasswordCard extends StatelessWidget {
   final PasswordItem item;
@@ -12,6 +13,8 @@ class PasswordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final icon = _iconFor(item.iconName);
+
     return Container(
       width: double.infinity,
       height: 88,
@@ -31,7 +34,7 @@ class PasswordCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
-              child: item.icon.svg(
+              child: icon.svg(
                 width: 30,
                 height: 30,
                 colorFilter: const ColorFilter.mode(
@@ -88,5 +91,16 @@ class PasswordCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  SvgGenImage _iconFor(String iconName) {
+    return switch (iconName) {
+      'amazon' => Assets.icons.amazon,
+      'apple' => Assets.icons.apple,
+      'facebook' => Assets.icons.facebook,
+      'google' => Assets.icons.google,
+      'netflix' => Assets.icons.netflix,
+      _ => Assets.icons.lock,
+    };
   }
 }

@@ -49,6 +49,7 @@ flutter:
   assets:
   - assets/logo/
   - assets/icons/
+  - assets/images/
   fonts:
   - family: BebasNeue
     fonts:

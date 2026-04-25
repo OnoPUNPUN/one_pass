@@ -102,6 +102,16 @@ class $AssetsIconsGen {
   ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/no_results.svg
+  SvgGenImage get noResults => const SvgGenImage('assets/images/no_results.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [noResults];
+}
+
 class $AssetsLogoGen {
   const $AssetsLogoGen();
 
@@ -119,6 +129,7 @@ class Assets {
   const Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLogoGen logo = $AssetsLogoGen();
 }
 
