@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:one_pass/features/home/presentation/models/password_item.dart';
+import 'package:one_pass/core/theme/app_colors.dart';
+import 'package:one_pass/features/home/data/datasources/home_local_data_source.dart';
 import 'package:one_pass/features/home/presentation/widgets/app_search_field.dart';
 import 'package:one_pass/features/home/presentation/widgets/counter_card.dart';
 import 'package:one_pass/features/home/presentation/widgets/password_card.dart';
@@ -15,8 +16,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final HomeLocalDataSource _localDataSource = const HomeLocalDataSourceImpl();
+
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final passwords = _localDataSource.getPasswords();
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -49,21 +55,48 @@ class _HomeScreenState extends State<HomeScreen> {
               AppSearchField(),
               Gap(20),
               Expanded(
-                child: ListView.builder(
-                  itemCount: dummyPasswords.length,
-                  itemBuilder: (context, index) {
-                    final item = dummyPasswords[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: PasswordCard(item: item),
-                    );
-                  },
-                ),
+                child: passwords.isEmpty
+                    ? _buildNoPassword(textTheme)
+                    : ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 108),
+                        itemCount: passwords.length,
+                        itemBuilder: (context, index) {
+                          final item = passwords[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: PasswordCard(item: item),
+                          );
+                        },
+                      ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Column _buildNoPassword(TextTheme textTheme) {
+    return Column(
+      crossAxisAlignment: .center,
+      children: [
+        Gap(50),
+        Assets.images.noResults.svg(width: 130, height: 146),
+        Gap(50),
+        Text(
+          "NO RESULTS",
+          style: textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.bold,
+            color: AppColors.slate,
+          ),
+        ),
+        Gap(10),
+        Text(
+          "We couldn't find anything. Try searching for something\nelse",
+          style: textTheme.bodySmall,
+          textAlign: .center,
+        ),
+      ],
     );
   }
 }
