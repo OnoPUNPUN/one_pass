@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/shared/presentation/widgets/root_navigation_shell.dart';
+import 'package:one_pass/features/add/presentation/pages/add_password_screen.dart';
 import 'package:one_pass/features/auth/presentation/pages/forgot_screen_email.dart';
 import 'package:one_pass/features/auth/presentation/pages/forgot_screen_resend.dart';
 import 'package:one_pass/features/auth/presentation/pages/login_screen.dart';
@@ -43,6 +44,10 @@ class AppRouter {
         path: HomeScreen.name,
         builder: (context, state) =>
             const RootNavigationShell(child: HomeScreen()),
+      ),
+      GoRoute(
+        path: AddPasswordScreen.name,
+        builder: (context, state) => const AddPasswordScreen(),
       ),
     ],
   );

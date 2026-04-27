@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/shared/presentation/widgets/one_pass_root_navigation_bar.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
+import 'package:one_pass/features/add/presentation/pages/add_password_screen.dart';
 import 'package:one_pass/features/home/presentation/pages/home_screen.dart';
 
 class RootNavigationShell extends StatelessWidget {
@@ -36,7 +37,7 @@ class RootNavigationShell extends StatelessWidget {
               selectedIndex: selectedIndex,
               onDestinationSelected: (index) =>
                   _onDestinationSelected(context, index),
-              onAddPressed: () {},
+              onAddPressed: () => context.push(AddPasswordScreen.name),
             ),
           ),
         ],
