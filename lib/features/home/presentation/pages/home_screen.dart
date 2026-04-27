@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: CounterCard(
-                      count: "5",
+                      count: passwords.length.toString(),
                       cardTopTitle: "Passowrd",
                       cardBottomTitle: "Stored",
                     ),
