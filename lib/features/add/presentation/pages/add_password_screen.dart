@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/shared/presentation/widgets/app_button.dart';
 import 'package:one_pass/core/shared/presentation/widgets/app_text_field.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
 import 'package:one_pass/core/shared/presentation/widgets/app_outline_button.dart';
+import 'package:one_pass/features/gen_new_password/presentation/pages/generate_new_passowrd_screen.dart';
 
 class AddPasswordScreen extends StatefulWidget {
   static const name = "/add-password";
@@ -67,7 +69,9 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
                   alignment: Alignment.centerRight,
                   child: AppOutlineButton(
                     btnText: "GENERATE NEW",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go(GenerateNewPassowrdScreen.name);
+                    },
                   ),
                 ),
                 const Gap(20),
