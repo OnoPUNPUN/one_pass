@@ -15,7 +15,7 @@ class AppOutlineButton extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return SizedBox(
       width: 157,
-      height: 40,
+      height: 50,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.primary,
