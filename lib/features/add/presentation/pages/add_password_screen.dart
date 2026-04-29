@@ -70,7 +70,7 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
                   child: AppOutlineButton(
                     btnText: "GENERATE NEW",
                     onPressed: () {
-                      context.go(GenerateNewPassowrdScreen.name);
+                      context.push(GenerateNewPassowrdScreen.name);
                     },
                   ),
                 ),

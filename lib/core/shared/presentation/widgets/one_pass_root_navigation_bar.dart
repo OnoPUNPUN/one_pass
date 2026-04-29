@@ -109,6 +109,19 @@ class OnePassRootNavigationBar extends StatelessWidget {
                         ),
                       ),
                     ),
+                  if (selectedIndex == 1)
+                    Positioned(
+                      left: 270 * scale,
+                      top: 66,
+                      width: 6,
+                      height: 2,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: AppColors.slate,
+                          borderRadius: BorderRadius.circular(1),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             );
