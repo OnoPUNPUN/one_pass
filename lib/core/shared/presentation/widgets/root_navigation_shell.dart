@@ -4,6 +4,7 @@ import 'package:one_pass/core/shared/presentation/widgets/one_pass_root_navigati
 import 'package:one_pass/core/theme/app_colors.dart';
 import 'package:one_pass/features/add/presentation/pages/add_password_screen.dart';
 import 'package:one_pass/features/home/presentation/pages/home_screen.dart';
+import 'package:one_pass/features/profile/presentation/pages/profile_screen.dart';
 
 class RootNavigationShell extends StatelessWidget {
   final Widget child;
@@ -50,7 +51,7 @@ class RootNavigationShell extends StatelessWidget {
       case 0:
         context.go(HomeScreen.name);
       case 1:
-        break;
+        context.go(ProfileScreen.name);
     }
   }
 }
