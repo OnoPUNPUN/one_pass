@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
+import 'package:one_pass/features/auth/presentation/pages/signup_screen.dart';
 
 class OnboradingBackButton extends StatelessWidget {
   const OnboradingBackButton({super.key});
@@ -10,7 +12,9 @@ class OnboradingBackButton extends StatelessWidget {
       child: SizedBox(
         height: 40,
         child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            context.go(SignupScreen.name);
+          },
           style: OutlinedButton.styleFrom(
             foregroundColor: AppColors.primary,
             side: const BorderSide(color: AppColors.primary, width: 2),

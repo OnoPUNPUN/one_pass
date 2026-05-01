@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "2.13.1"
   bloc:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: bloc
       sha256: a48653a82055a900b88cd35f92429f068c5a8057ae9b136d197b3d56c57efb81
@@ -419,6 +419,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_tts:
+    dependency: transitive
+    description:
+      name: flutter_tts
+      sha256: ce5eb209b40e95f2f4a1397116c87ab2fcdff32257d04ed7a764e75894c03775
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.5"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -949,6 +957,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  snackify:
+    dependency: "direct main"
+    description:
+      name: snackify
+      sha256: "9e6c48a91b2407dfd155bdc9c6a02edcc7ee8d36d79a9477e9338c30f021cb42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.4"
   source_map_stack_trace:
     dependency: transitive
     description:
