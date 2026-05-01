@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_pass/core/theme/app_colors.dart';
+import 'package:one_pass/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:one_pass/features/auth/presentation/pages/login_screen.dart';
+import 'package:snackify/snackify.dart';
+import 'package:snackify/enums/snack_enums.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_field.dart';
 import 'package:one_pass/features/auth/presentation/widgets/auth_text_naviagation.dart';
 import 'package:one_pass/gen/assets.gen.dart';
@@ -36,9 +40,29 @@ class _SignupScreenState extends State<SignupScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
-          child: Form(
+        child: BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthSuccess) {
+              Snackify.show(
+                context: context,
+                type: SnackType.success,
+                title: const Text('Success'),
+                subtitle: const Text('Verify your account...'),
+              );
+              context.go(LoginScreen.name);
+            } else if (state is AuthFailure) {
+              Snackify.show(
+                context: context,
+                type: SnackType.error,
+                title: const Text('Error'),
+                subtitle: Text(state.message),
+              );
+            }
+          },
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
+              child: Form(
             key: _fromkey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,10 +106,21 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 Gap(30),
                 SizedBox(
-                  width: .infinity,
+                  width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("REGISTER"),
+                    onPressed: state is AuthLoading ? null : () {
+                      if (_fromkey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                          SignupRequested(
+                            email: _emailTEController.text.trim(),
+                            password: _passwordTEController.text,
+                          ),
+                        );
+                      }
+                    },
+                    child: state is AuthLoading
+                      ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                      : const Text("REGISTER"),
                   ),
                 ),
                 Gap(50),
@@ -99,8 +134,10 @@ class _SignupScreenState extends State<SignupScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        );
+      },
+    ),
+  ),
+);
   }
 }

@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Files
+Core Logics.pdf
+Supabase Database.pdf
+System Architecture.pdf
+api_key.txt
+GEMINI.md

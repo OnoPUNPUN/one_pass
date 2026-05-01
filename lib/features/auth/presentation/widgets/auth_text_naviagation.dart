@@ -30,7 +30,7 @@ class AuthTextNaviagation extends StatelessWidget {
             TextSpan(
               recognizer: TapGestureRecognizer()..onTap = onTap,
               // text: "\nLogin",
-              text: "\n${botText}",
+              text: "\n$botText",
               style: textTheme.bodySmall!.copyWith(
                 color: AppColors.primary,
                 fontWeight: .w800,
