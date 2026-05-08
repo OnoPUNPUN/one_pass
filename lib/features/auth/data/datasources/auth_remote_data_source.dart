@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:one_pass/core/error/exceptions.dart';
 import 'package:one_pass/core/network/api_client.dart';
+import 'package:one_pass/core/network/token_manager.dart';
 import 'package:one_pass/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
@@ -10,8 +11,9 @@ abstract class AuthRemoteDataSource {
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiClient apiClient;
+  final TokenManager tokenManager;
 
-  AuthRemoteDataSourceImpl(this.apiClient);
+  AuthRemoteDataSourceImpl(this.apiClient, this.tokenManager);
 
   String _parseError(DioException e) {
     if (e.response != null && e.response!.data != null) {
@@ -39,7 +41,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           "password": password,
         },
       );
-      return UserModel.fromJson(response.data);
+      final user = UserModel.fromJson(response.data);
+      if (user.accessToken != null) {
+        await tokenManager.saveToken(user.accessToken!);
+      }
+      await tokenManager.saveUserId(user.id);
+      return user;
     } on DioException catch (e) {
       throw ServerException(message: _parseError(e));
     } catch (e) {
@@ -58,14 +65,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         },
       );
       
+      UserModel user;
       if (response.data['user'] != null) {
-        return UserModel.fromJson(response.data);
+        user = UserModel.fromJson(response.data);
       } else {
-        return UserModel(
+        user = UserModel(
           id: response.data['id'],
           email: response.data['email'],
+          accessToken: response.data['access_token'],
         );
       }
+      
+      if (user.accessToken != null) {
+        await tokenManager.saveToken(user.accessToken!);
+      }
+      await tokenManager.saveUserId(user.id);
+      return user;
     } on DioException catch (e) {
       throw ServerException(message: _parseError(e));
     } catch (e) {
