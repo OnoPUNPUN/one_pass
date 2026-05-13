@@ -19,6 +19,12 @@ import 'package:one_pass/features/home/data/repositories/home_repository_impl.da
 import 'package:one_pass/features/home/domain/repositories/home_repository.dart';
 import 'package:one_pass/features/home/domain/usecases/get_passwords_usecase.dart';
 import 'package:one_pass/features/home/presentation/bloc/home_bloc.dart';
+import 'package:one_pass/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:one_pass/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:one_pass/features/profile/domain/repositories/profile_repository.dart';
+import 'package:one_pass/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:one_pass/features/profile/domain/usecases/update_profile_usecase.dart';
+import 'package:one_pass/features/profile/presentation/bloc/profile_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -66,6 +72,20 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(sl(), sl()),
+  );
+
+  // Features - Profile
+  sl.registerFactory(() => ProfileBloc(
+        getProfileUseCase: sl(),
+        updateProfileUseCase: sl(),
+      ));
+  sl.registerLazySingleton(() => GetProfileUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateProfileUseCase(sl()));
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(sl(), sl()),
   );
 
   // Core
