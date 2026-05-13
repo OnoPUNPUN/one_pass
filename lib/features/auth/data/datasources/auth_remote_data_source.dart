@@ -6,7 +6,7 @@ import 'package:one_pass/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
-  Future<UserModel> signup(String email, String password);
+  Future<UserModel> signup(String email, String password, String name);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -55,13 +55,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> signup(String email, String password) async {
+  Future<UserModel> signup(String email, String password, String name) async {
     try {
       final response = await apiClient.post(
         '/auth/v1/signup',
         data: {
           "email": email,
           "password": password,
+          "data": {
+            "username": name,
+          }
         },
       );
       

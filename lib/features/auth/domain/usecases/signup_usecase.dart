@@ -8,7 +8,7 @@ class SignupUseCase {
 
   SignupUseCase(this.repository);
 
-  Future<Either<Failure, User>> call(String email, String password) async {
-    return await repository.signup(email, password);
+  Future<Either<Failure, User>> call(String email, String password, String name) async {
+    return await repository.signup(email, password, name);
   }
 }
